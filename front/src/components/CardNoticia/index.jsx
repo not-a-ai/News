@@ -5,7 +5,7 @@ const CardNoticia = ({ noticia }) => {
     <div>
       <h2>{noticia.titulo}</h2>
       <img src={noticia.img} alt={noticia.titulo} />
-      <p>{noticia.texto}</p>
+      <p dangerouslySetInnerHTML={ {__html: noticia.texto}}/>
     </div>
   )
 }

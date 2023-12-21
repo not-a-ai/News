@@ -2,9 +2,14 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const usuarioModel = require('./src/module/usuario/usuario.model'); 
 const jwt = require('jsonwebtoken');
+const NoticiaModel = require('./src/module/noticia/noticia.model');
 const app = express();
+const cors = require('cors');
+app.use(cors());
 //HACK PARA PASSAR UM JSON PARA O BD
 app.use(express.json());
+
+
 
 app.post('/login', async (req, res) => {
   if (!req.body.email) {
@@ -67,12 +72,38 @@ app.post('/usuarios', async(req, res) => {
   return res.status(201).json(usuario);
 });
 
-app.get('/noticias', (req, res) => {
-  return res.status(200).json([]);
+app.get('/noticias', async(req, res) => {
+
+  let filtroCategoria = {};
+  if(req.query.categoria) {
+    filtroCategoria = { categoria: req.query.categoria }
+  }
+
+  const noticias = await NoticiaModel.find(filtroCategoria);
+  return res.status(200).json(noticias);
 });
 
-app.post('/noticias', (req, res) => {
-  return res.status(201).json([]);
+app.post('/noticias', async(req, res) => {
+  if (!req.body.titulo) {
+    return res.status(400).json({ message: 'Titulo é obrigatório' });
+  }
+  if (!req.body.img) {
+    return res.status(400).json({ message: 'Imagem é obrigatória' });
+  }
+  if (!req.body.texto) {
+    return res.status(400).json({ message: 'Texto é obrigatório' });
+  }
+  if (!req.body.categoria) {
+    return res.status(400).json({ message: 'Categoria é obrigatória' });
+  }
+  
+  const noticia = await NoticiaModel.create({
+    titulo: req.body.titulo,
+    img: req.body.img,
+    texto: req.body.texto,
+    categoria: req.body.categoria,
+  });
+  return res.status(201).json(noticia);
 });
 
 app.listen(8080, () => {

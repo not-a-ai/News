@@ -20,8 +20,8 @@ const NoticiasPage = ({ params }) => {
 
 
   return (
-    <div>
-      <h1>{params.categoria.toUpperCase()}</h1>
+    <div style={{ textAlign: 'center'}}>
+      <h1 style={{  padding:'20px 0'}}>{params.categoria.toUpperCase()}</h1>
       <GridNoticias noticias={noticias}/>
     </div>
   )

@@ -23,17 +23,27 @@ const HomePage = () => {
     getNoticias();
   }, [])
 
-  console.log(noticias)
+  const getNoticiaMaisPopular = () => {
+    if (noticias) {
+      return noticias.find(noticia => noticia.isPopular)
+    }
+  }
+  const getUltimasNoticias = () => {
+    if (noticias) {
+      return noticias.filter(noticia => noticia.isUltimas)
+    }
+  }
+  
   return (
     <div className="grid-home">
-      <LateralEsquerdo noticia={noticias[0]}/>
+      { getNoticiaMaisPopular() && <LateralEsquerdo noticia={getNoticiaMaisPopular()} /> }
 
       <div>
         {noticias.map(noticia => 
         <Noticia key={noticia._id} noticia={noticia}/>)}
       </div>
 
-      {/* <LateralDireito noticia={noticias[0]}/> */}
+      { getUltimasNoticias() && <LateralDireito noticias={ getUltimasNoticias() } /> }
     </div>
   )
 }

@@ -1,0 +1,12 @@
+.logincadastro {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 70vh;
+
+}
+
+.logincadastro h1 {
+  height: 5vh;
+}

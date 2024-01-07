@@ -75,7 +75,3 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir issues, enviar p
 
 Este projeto está licenciado sob a [Licença XYZ](link-para-licenca), o que significa que você pode utilizá-lo de acordo com os termos desta licença.
 
----
-
-**Nota:** Este README é um exemplo básico. Personalize conforme necessário para o seu projeto, incluindo mais detalhes, imagens, instruções específicas e informações adicionais.
-
